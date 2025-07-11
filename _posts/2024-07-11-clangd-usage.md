@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "如何生成compile_commands.json"
-date: 2025-07-11 15:42
+date: 2024-07-11 15:42:00 +0800  # 注意时区
 categories: [博客, 教程]  # 分类（可多个）
 tags: [tool, script]      # 标签（可多个）
 ---
