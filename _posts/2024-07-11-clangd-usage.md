@@ -1,5 +1,4 @@
 ---
-layout: post
 title: "如何生成compile_commands.json"
 date: 2024-07-11 15:42:00 +0800  # 注意时区
 categories: [博客, 教程]  # 分类（可多个）
@@ -43,7 +42,7 @@ call C:\APP\cmake-3.25.2-windows-x86_64\bin\cmake.exe %*
 然后，在vscode的CmakeTools插件设置中，找到“Cmake Path”设置项，将之修改为这个msvc172-cmake-wrapper.bat文件的全路径。接下来其他的东西都跟正常用cmake+ninja一样了，-T参数也按原来的样子传递，确保cmake和ninja都满意。
 我没试过故意传递不一样的会怎么样。
 
-### 使用PWSH的方式
+### bat脚本的方式
 
 [5分钟掌握cmake(15): 使用Ninja替代MSBuild - 知乎](https://zhuanlan.zhihu.com/p/667238877)
 
@@ -74,9 +73,9 @@ cmake ^
 
 当然，根据以上分析可以使用如下powershell脚本
 
-### pwsh脚本
+### pwsh脚本的方式
 
-```ps1
+```powershell
 
 #启动 Visual Studio 开发者命令行环境
 . "D:\Program Files\Microsoft Visual Studio\2022\Professional\Common7\Tools\Launch-VsDevShell.ps1" `
@@ -89,15 +88,16 @@ cmake -S . -B build\build\x64-windows-clang-debug `
 
 ```
 
+> 其实第一行设置了环境变量之后，那么之后再跑这个脚本也不用设置了
+{: .prompt-tip }
+
 ### 一些注意事项
 
-其实第一行设置了环境变量之后，那么之后再也不用设置了
 
-至于我为什么把compile_commands.json放在build\build\x64-windows-clang-debug下，是因为这样跑脚本的时候，不会污染build目录，build目录是vscode的插件cmake tools命令面板的默认输出目录
 
->cmake:configure
+至于我为什么把compile_commands.json放在build\build\x64-windows-clang-debug下，是因为这样跑脚本的时候，不会污染build目录，build目录是vscode的插件cmake tools命令面板的cmake:Configure默认输出目录
 
-当然，也可以修改cmake tools插件的设置，generator直接改成ninja，那么跑上面的命令来生成json的时候，就不会再生成sln这种解决方案文件了，我由于还需要用到sln打开解决方案附加到进程调试。所以最后选择了这样
+当然，也可以修改cmake tools插件的设置，generator直接改成ninja，那么跑上面的命令来生成json的时候，就不会再生成sln这种解决方案文件了，我由于还需要用到sln打开解决方案附加到进程调试。所以最后选择了这样使用脚本的方式
 
 另外，generator改成ninja之后，cmake:build命令也是可以编译通过的，而且编译器依旧是msvc的cl.exe
 
