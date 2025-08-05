@@ -1,0 +1,16 @@
+{
+  "Jekyll Post Front Matter": {
+    "prefix": "jekyllfm",
+    "body": [
+      "---",
+      "title: \"${1}\"",
+      "date: ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}:00 +0800",
+      "categories: []",
+      "tags: []",
+      "---",
+      "",
+      "$0"
+    ],
+    "description": "Jekyll博客文章头部模板"
+  }
+}
